@@ -1,0 +1,20 @@
+{
+  "name": "chatlog_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alish7175/chatlog_p3_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alish7175/chatlog_p3_project/issues"
+  },
+  "homepage": "https://github.com/Alish7175/chatlog_p3_project#readme"
+}

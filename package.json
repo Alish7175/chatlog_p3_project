@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Alish7175/chatlog_p3_project#readme",
   "dependencies": {
+    "bad-words": "^3.0.3",
     "express": "^4.16.4",
     "nodemon": "^2.0.5",
     "socket.io": "2.2.0"

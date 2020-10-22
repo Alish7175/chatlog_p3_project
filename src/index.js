@@ -3,6 +3,7 @@ const http = require('http')
 const express = require('express')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
+const { generateMessage } = require('./utils/messages')
 
 const app = express()
 const Server =  http.createServer(app)
@@ -18,7 +19,7 @@ let count = 0
 io.on('connection', (socket) =>{
     console.log('New websocket connections')
 
-    socket.emit('message', 'Welcome!')
+    socket.emit('message', generateMessage('Welcome'))
 
     socket.broadcast.emit('message', 'new user has joined the chat')
 
@@ -29,11 +30,11 @@ io.on('connection', (socket) =>{
             return callback('profanity is not allowed')
         }
         
-        io.emit('message', message)
+        io.emit('message', generateMessage(message))
         callback()
     })
     socket.on('disconnect', () => {
-        io.emit('message', 'User left the chat')
+        io.emit('message', generateMessage('User has left the chat'))
     })
     socket.on('sendLocation', (coords, callback) =>{
         io.emit('locationMessage', `https://google.com/maps?q=${coords.latitude},${coords.longitude}`)

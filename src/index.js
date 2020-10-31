@@ -1,6 +1,7 @@
 const path = require('path')
 const http = require('http')
 const express = require('express')
+const mongodb = require('mongodb')
 const socketio = require('socket.io')
 const Filter = require('bad-words')
 const { generateMessage, generateLocationMessage } = require('./utils/messages')
@@ -9,6 +10,32 @@ const {addUser, removeUser, getUser, getUserInRoom} = require('./utils/users')
 const app = express()
 const server = http.createServer(app)
 const io = socketio(server)
+
+//Database connection starts
+const MongoClient = mongodb.MongoClient
+const connectionURL = 'mongodb+srv://alish:alish123@cluster0.e27pd.mongodb.net/chatlog?retryWrites=true&w=majority'
+const databaseName = 'chatlog'
+
+MongoClient.connect(connectionURL, {useNewUrlParser: true}, (error, client) => {
+    if (error){
+       return console.log('Unable to connect to database ')
+    }
+    console.log('connected to database!!')
+
+    const db = client.db(databaseName)
+    db.collection('chatLogUsers').insertOne({
+        username: 'Alish',
+        email: "alishmadhukar75@gmail.com",
+        password:"abcd1234"
+    }, (error, result) => {
+        if (error) {
+            return console.log('Unable to insert user')
+        }
+        console.log(result.ops)
+    })
+})
+
+//database related work ends
 
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
